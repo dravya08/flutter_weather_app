@@ -1,16 +1,19 @@
-# flutter_weather_app
+Follow these steps to set up and run the app:
 
-A new Flutter project.
+Prerequisites
+Flutter SDK installed on your machine.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+An API key from https://api-ninjas.com/api/weather
 
-A few resources to get you started if this is your first Flutter project:
+Installation
+1.Clone the repository:
+git clone https://github.com/dravya08/flutter_weather_app.git
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+2.Navigate to the project directory: cd flutter_weather_app
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+3.Create a .env file in the root directory and add your API-NINJAS API key: API_KEY=your_api_key_here
+
+4.Install dependencies: flutter pub get
+
+Run the app: flutter run

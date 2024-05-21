@@ -3,6 +3,7 @@ Follow these steps to set up and run the app:
 Prerequisites
 Flutter SDK installed on your machine.
 An API key from https://api-ninjas.com/api/weather
+
 Installation
 Clone the repository:
 git clone https://github.com/your_username/weather_forecast_app.git

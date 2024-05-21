@@ -5,8 +5,8 @@ Flutter SDK installed on your machine.
 An API key from https://api-ninjas.com/api/weather
 
 Installation
-Clone the repository:
-git clone https://github.com/your_username/weather_forecast_app.git
+1.Clone the repository:
+git clone https://github.com/dravya08/flutter_weather_app.git
 
 2.Navigate to the project directory: cd flutter_weather_app
 

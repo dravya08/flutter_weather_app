@@ -125,6 +125,15 @@ class WeatherController extends GetxController {
           forecastData["wind_speed"],
           forecastData["cloud_pct"],
         );
+
+        WeatherDatabase().insertWeather(
+            cityName.value,
+            forecastData["temp"],
+            forecastData["min_temp"],
+            forecastData["min_temp"],
+            forecastData["humidity"],
+            forecastData["wind_speed"],
+            weatherCondition.value);
         exception('');
         isLoading(false);
       } else {
@@ -168,6 +177,15 @@ class WeatherController extends GetxController {
         );
 
         cityName(location.capitalizeFirst);
+
+        WeatherDatabase().insertWeather(
+            cityName.value,
+            forecastData["temp"],
+            forecastData["min_temp"],
+            forecastData["min_temp"],
+            forecastData["humidity"],
+            forecastData["wind_speed"],
+            weatherCondition.value);
         exception('');
 
         isLoading(false);

@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:anim_search_bar/anim_search_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_weather_app/helper/database_helper.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,6 +39,52 @@ class HomeScreen extends StatelessWidget {
                       ? Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                vertical: size.height * 0.02,
+                                horizontal: size.width * 0.05,
+                              ),
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  IconButton(
+                                    onPressed: () {
+                                      Get.toNamed("/settings")!
+                                          .then((value) => Get.isDarkMode);
+                                    },
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.bars,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  ),
+                                  Align(
+                                    child: Text(
+                                      'Weather App', //TODO: change app name
+                                      style: GoogleFonts.questrial(
+                                        color: isDarkMode
+                                            ? Colors.white
+                                            : const Color(0xff1D1617),
+                                        fontSize: size.height * 0.02,
+                                      ),
+                                    ),
+                                  ),
+                                  IconButton(
+                                    onPressed: () {
+                                      weatherController.onInit();
+                                    },
+                                    icon: FaIcon(
+                                      FontAwesomeIcons.arrowsRotate,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : Colors.black,
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
                             Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: AnimSearchBar(
@@ -76,6 +123,39 @@ class HomeScreen extends StatelessWidget {
                               ),
                             ),
                             Text("${weatherController.exception}"),
+                            FutureBuilder(
+                                future: WeatherDatabase().queryAllRows(),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData) {
+                                    return Center(
+                                        child: CircularProgressIndicator());
+                                  } else {
+                                    return ListView.separated(
+                                      shrinkWrap: true,
+                                      itemCount: snapshot.data!.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return ListTile(
+                                          title: Text(
+                                              "${snapshot.data![index]["city"]}"),
+                                          subtitle: Text(
+                                              "${snapshot.data![index]["weatherCondition"].toString().capitalizeFirst}"),
+                                          trailing: Text(
+                                            "${snapshot.data![index]["temperature"]} ${weatherController.getTemperatureUnitLabel()}",
+                                            style: TextStyle(
+                                                fontSize: size.height * 0.024),
+                                          ),
+                                        );
+                                      },
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return SizedBox(
+                                          height: 10,
+                                        );
+                                      },
+                                    );
+                                  }
+                                })
                           ],
                         )
                       : weatherController.isLoading.value
